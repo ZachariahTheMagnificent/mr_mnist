@@ -18,7 +18,7 @@
 #pragma once
 #include <cmath>
 
-namespace mr_mnist {
+namespace world::zachariahs::mr_mnist {
 template <typename Type> auto sigmoid(const Type value) {
   auto x = std::exp(value);
   return x / (x + 1);
@@ -28,4 +28,4 @@ template <typename Type> auto sigmoid_derivative(const Type value) {
   const auto sigmoid_result = sigmoid(value);
   return sigmoid_result * (1 - sigmoid_result);
 }
-} // namespace mr_mnist
+} // namespace world::zachariahs::mr_mnist

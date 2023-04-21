@@ -26,7 +26,7 @@
 #include <span>
 #include <vector>
 
-namespace mr_mnist {
+namespace world::zachariahs::mr_mnist {
 class Labels {
 public:
   std::size_t size;
@@ -91,4 +91,4 @@ public:
     assert(this->pixels.size() == this->width * this->height * this->size);
   }
 };
-} // namespace mr_mnist
+} // namespace world::zachariahs::mr_mnist

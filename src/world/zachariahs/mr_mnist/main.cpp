@@ -20,6 +20,8 @@
 #include <world/zachariahs/mr_mnist/math.hpp>
 #include <world/zachariahs/mr_mnist/resources.hpp>
 
+namespace mr_mnist = world::zachariahs::mr_mnist;
+
 auto main(int argc, char **argv) -> int {
   std::cout << "Hello, I am Mr Mnist!\n";
 
