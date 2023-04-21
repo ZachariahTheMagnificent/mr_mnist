@@ -30,5 +30,8 @@ add_executable(${PROJECT_NAME})
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
-target_sources(${PROJECT_NAME} PRIVATE FILE_SET main_modules TYPE HEADERS BASE_DIRS include PRIVATE include/mr_mnist/mr_mnist.hpp)
-target_sources(${PROJECT_NAME} PRIVATE src/main.cpp)
+target_sources(${PROJECT_NAME} PRIVATE FILE_SET main_modules TYPE HEADERS BASE_DIRS include PRIVATE
+  include/world/zachariahs/mr_mnist/math.hpp
+  include/world/zachariahs/mr_mnist/resources.hpp
+)
+target_sources(${PROJECT_NAME} PRIVATE src/world/zachariahs/mr_mnist/main.cpp)
