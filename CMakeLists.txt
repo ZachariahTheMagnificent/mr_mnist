@@ -32,6 +32,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE include)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 target_sources(${PROJECT_NAME} PRIVATE FILE_SET main_modules TYPE HEADERS BASE_DIRS include PRIVATE
   include/world/zachariahs/mr_mnist/math.hpp
+  include/world/zachariahs/mr_mnist/deep_neural_network.hpp
   include/world/zachariahs/mr_mnist/resources.hpp
 )
 target_sources(${PROJECT_NAME} PRIVATE src/world/zachariahs/mr_mnist/main.cpp)

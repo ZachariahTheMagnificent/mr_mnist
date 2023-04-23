@@ -15,8 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ****************************************************************************/
+#include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <world/zachariahs/mr_mnist/deep_neural_network.hpp>
 #include <world/zachariahs/mr_mnist/math.hpp>
 #include <world/zachariahs/mr_mnist/resources.hpp>
 
@@ -25,17 +27,17 @@ namespace mr_mnist = world::zachariahs::mr_mnist;
 auto main(int argc, char **argv) -> int {
   std::cout << "Hello, I am Mr Mnist!\n";
 
-  auto test_images =
-      mr_mnist::Images{"share/world/zachariahs/mr_mnist/Training Data/t10k-images-idx3-ubyte"};
-  auto test_labels =
-      mr_mnist::Labels{"share/world/zachariahs/mr_mnist/Training Data/t10k-labels-idx1-ubyte"};
+  auto test_images = mr_mnist::Images{
+      "share/world/zachariahs/mr_mnist/Training Data/t10k-images-idx3-ubyte"};
+  auto test_labels = mr_mnist::Labels{
+      "share/world/zachariahs/mr_mnist/Training Data/t10k-labels-idx1-ubyte"};
 
   assert(test_images.size == test_labels.size);
 
-  auto training_images =
-      mr_mnist::Images{"share/world/zachariahs/mr_mnist/Training Data/train-images-idx3-ubyte"};
-  auto training_labels =
-      mr_mnist::Labels{"share/world/zachariahs/mr_mnist/Training Data/train-labels-idx1-ubyte"};
+  auto training_images = mr_mnist::Images{
+      "share/world/zachariahs/mr_mnist/Training Data/train-images-idx3-ubyte"};
+  auto training_labels = mr_mnist::Labels{
+      "share/world/zachariahs/mr_mnist/Training Data/train-labels-idx1-ubyte"};
 
   assert(training_images.size == training_labels.size);
 
@@ -54,6 +56,22 @@ auto main(int argc, char **argv) -> int {
     }
     std::cout << '\n';
   }
+
+  const auto layer_sizes = std::array{
+      static_cast<std::size_t>(test_images.width * test_images.height),
+      std::size_t{16}, std::size_t{16}, std::size_t{10}};
+  auto random_device = std::random_device{};
+  auto generator = std::mt19937_64{random_device()};
+  auto digit_recognizer = mr_mnist::DeepNeuralNetwork{"savefile", generator,
+                                                      layer_sizes};
+  std::cout << "Neural network created!\n";
+  auto input = std::vector<float>{};
+  input.resize(test_images.width * test_images.height);
+  std::transform(test_images.pixels.begin(), test_images.pixels.begin() + input.size(),
+                 input.begin(),
+                 [](const unsigned char value) { return value / 255.0f; });
+  digit_recognizer(input);
+  std::cout << "Bye!\n";
 
   return EXIT_SUCCESS;
 }
