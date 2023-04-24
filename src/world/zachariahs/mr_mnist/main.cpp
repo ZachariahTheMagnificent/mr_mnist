@@ -65,9 +65,10 @@ auto main(int argc, char **argv) -> int {
   auto digit_recognizer = mr_mnist::DeepNeuralNetwork{"savefile", generator,
                                                       layer_sizes};
   std::cout << "Neural network created!\n";
+  const auto input_size = test_images.width + test_images.height;
   auto input = std::vector<float>{};
-  input.resize(test_images.width * test_images.height);
-  std::transform(test_images.pixels.begin(), test_images.pixels.begin() + input.size(),
+  input.resize(input_size);
+  std::transform(test_images.pixels.begin(), test_images.pixels.begin() + input_size,
                  input.begin(),
                  [](const unsigned char value) { return value / 255.0f; });
   digit_recognizer(input);
