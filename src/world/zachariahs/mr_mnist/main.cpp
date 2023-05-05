@@ -28,9 +28,9 @@ auto main(int argc, char **argv) -> int {
   std::cout << "Hello, I am Mr Mnist!\n";
 
   auto test_images = mr_mnist::Images{
-      "share/world/zachariahs/mr_mnist/Training Data/t10k-images-idx3-ubyte"};
+      "../share/world/zachariahs/mr_mnist/Training Data/t10k-images-idx3-ubyte"};
   auto test_labels = mr_mnist::Labels{
-      "share/world/zachariahs/mr_mnist/Training Data/t10k-labels-idx1-ubyte"};
+      "../share/world/zachariahs/mr_mnist/Training Data/t10k-labels-idx1-ubyte"};
 
   assert(test_images.size == test_labels.size);
 
